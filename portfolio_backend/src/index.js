@@ -12,7 +12,7 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 app.use(
   cors({
-    origin: "*", // TODO: ganti dengan domain Netlify kamu untuk production
+    origin: "https://ahmadtazusyarofi.netlify.app/", // TODO: ganti dengan domain Netlify kamu untuk production
   })
 );
 app.use(express.json());
