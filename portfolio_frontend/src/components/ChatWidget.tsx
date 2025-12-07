@@ -6,8 +6,7 @@ interface ChatMessage {
   content: string;
 }
 
-const BACKEND_URL =
-  import.meta.env.VITE_CHAT_API_URL ?? "http://localhost:5000/api/chat";
+const BACKEND_URL = import.meta.env.VITE_CHAT_API_URL;
 
 // Pengetahuan statis tentang Ahmad untuk membantu AI menjawab lebih akurat.
 // Silakan EDIT teks ini kalau nanti kamu update isi portfolio (skill / project baru).
