@@ -6,7 +6,9 @@ interface ChatMessage {
   content: string;
 }
 
-const BACKEND_URL = import.meta.env.VITE_CHAT_API_URL;
+const BACKEND_URL =
+  import.meta.env.VITE_CHAT_API_URL ??
+  "https://api-ahmad.tubsamy.tech/api/chat";
 
 // Pengetahuan statis tentang Ahmad untuk membantu AI menjawab lebih akurat.
 // Silakan EDIT teks ini kalau nanti kamu update isi portfolio (skill / project baru).
