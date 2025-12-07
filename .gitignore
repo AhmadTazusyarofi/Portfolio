@@ -1,0 +1,20 @@
+# Node modules (frontend & backend)
+portfolio_frontend/node_modules/
+portfolio_backend/node_modules/
+
+# Build output
+portfolio_frontend/dist/
+portfolio_backend/dist/
+
+# Env files / secrets
+portfolio_frontend/.env
+portfolio_backend/.env
+
+# Vite / tooling cache
+portfolio_frontend/.vite/
+portfolio_backend/.vite/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+*.log

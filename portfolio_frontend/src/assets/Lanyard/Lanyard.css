@@ -1,0 +1,11 @@
+.lanyard-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* PENTING: override aturan global yang mungkin bikin canvas nggak bisa di-click */
+.lanyard-wrapper canvas,
+.lanyard-canvas {
+  pointer-events: auto !important;
+}
