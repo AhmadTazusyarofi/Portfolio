@@ -10,11 +10,7 @@ const port = process.env.PORT || 5000;
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-app.use(
-  cors({
-    origin: "https://ahmadtazusyarofi.netlify.app/", // TODO: ganti dengan domain Netlify kamu untuk production
-  })
-);
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
