@@ -20,18 +20,24 @@ import Ribbons from "./components/Ribbons";
 import RotatingText from "./components/RotatingText";
 import ScrollReveal from "./components/ScrollReveal";
 import ScrollVelocity from "./components/ScrollVelocity";
+import SplitText from "./components/SplitText";
 import StaggeredMenu from "./components/StaggeredMenu";
-import TextPressure from "./components/TextPressure";
 
 import logo from "@/assets/logo.svg?url";
-import { Github, Instagram, Linkedin, Twitter } from "lucide-react";
+import {
+  ArrowUpRight,
+  Github,
+  Instagram,
+  Linkedin,
+  Twitter,
+} from "lucide-react";
 import { icons } from "./lib/utils-icon";
 import { PROJECTS, type ProjectItem } from "./lib/utils-project";
 
 function App() {
   const phrases = [
-    { prefix: "My name is", word: "Ahmad Tazusyarofi" },
-    { prefix: "I'm a", word: "Web Developer" },
+    { prefix: "I'm", word: "Ahmad Tazusyarofi" },
+    { prefix: "I'm", word: "a Web Developer" },
   ];
 
   const handleAnimationComplete = () => {
@@ -174,57 +180,142 @@ function App() {
 
       {/* HERO */}
       <main className="relative z-10 flex items-center justify-center min-h-screen px-4">
-        <section
-          id="home"
-          className="w-full max-w-4xl flex flex-col items-center text-center gap-10"
+        <motion.section
+          className="relative z-20 w-full max-w-6xl flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16 pt-10 pb-10 md:pt-0"
+          initial={{ opacity: 0, y: 30, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
         >
-          <div className="flex items-center justify-center">
-            <TextPressure
-              text="Welcome!"
-              flex
-              alpha={false}
-              stroke={false}
-              width
-              weight
-              italic
-              textColor="#ffffff"
-              strokeColor="#ff0000"
-              minFontSize={300}
-            />
-          </div>
+          {/* KIRI: TEKS */}
+          <motion.div
+            className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left gap-4 order-2 md:order-1"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          >
+            {/* TextPressure opsional */}
+            {/* <div className="flex items-center justify-center md:justify-start w-full">
+              <TextPressure
+                text="Welcome!"
+                flex
+                alpha={false}
+                stroke={false}
+                width
+                weight
+                italic
+                textColor="#ffffff"
+                strokeColor="#ff0000"
+                minFontSize={300}
+              />
+            </div> */}
 
-          <div className="flex flex-wrap items-center justify-center gap-3 text-3xl md:text-6xl font-extrabold">
-            <span className="text-slate-100">
-              {phrases[phraseIndex].prefix}
-            </span>
+            <div className="flex flex-col items-center md:items-start gap-3">
+              {/* Baris pertama: SplitText */}
+              <SplitText
+                text="Hey, there"
+                tag="h1"
+                className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-100"
+                splitType="chars"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-100px"
+                textAlign="left"
+                onLetterAnimationComplete={handleAnimationComplete}
+              />
 
-            <RotatingText
-              texts={phrases.map((p) => p.word)}
-              onNext={(index) => setPhraseIndex(index)}
-              mainClassName="px-2 sm:px-2 md:px-3 bg-[#5227ff] text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-              staggerFrom="last"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-120%" }}
-              staggerDuration={0.025}
-              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              rotationInterval={3000}
-            />
-          </div>
-        </section>
+              {/* Baris kedua: prefix + RotatingText */}
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 font-extrabold">
+                <span className="text-slate-100 text-3xl md:text-5xl lg:text-6xl">
+                  {phrases[phraseIndex].prefix}
+                </span>
+
+                <RotatingText
+                  texts={phrases.map((p) => p.word)}
+                  onNext={(index) => setPhraseIndex(index)}
+                  mainClassName="px-2 sm:px-2 md:px-3 bg-[#5227ff] text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg text-2xl md:text-4xl lg:text-5xl"
+                  staggerFrom="last"
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-120%" }}
+                  staggerDuration={0.025}
+                  splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                  rotationInterval={3000}
+                />
+              </div>
+            </div>
+
+            <p className="mt-3 text-sm md:text-base text-slate-300 max-w-md">
+              I’m a web developer who loves building smooth, interactive, and
+              visually clean interfaces for the web.
+            </p>
+
+            <div
+              className="mt-4 flex flex-wrap gap-3"
+              style={{ pointerEvents: "auto" }}
+            >
+              <a
+                href="#projects"
+                className="inline-flex items-center justify-center rounded-full bg-[#5227ff] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#5227ff]/40 hover:shadow-[#5227ff]/60 hover:-translate-y-0.5 transition-transform duration-200"
+                style={{ pointerEvents: "auto" }}
+              >
+                View my work
+              </a>
+
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center rounded-full border border-slate-500 px-4 py-2.5 text-sm font-semibold text-slate-100 hover:border-slate-300 hover:text-white hover:-translate-y-0.5 transition-transform duration-200"
+                style={{ pointerEvents: "auto" }}
+              >
+                Contact me
+              </a>
+            </div>
+          </motion.div>
+
+          {/* KANAN: ROBOT / SPLINE */}
+          <motion.div
+            className="w-full md:w-1/2 h-80 sm:h-[380px] md:h-[450px] lg:h-[520px] mx-auto md:pl-8 lg:pl-16 flex justify-center md:justify-end order-1 md:order-2"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.35 }}
+          >
+            <spline-viewer
+              className="w-full h-full max-w-[460px] md:max-w-[520px]"
+              url="https://prod.spline.design/Whk7sxwg9nLOyMlS/scene.splinecode"
+            ></spline-viewer>
+          </motion.div>
+        </motion.section>
       </main>
 
+      <div className="relative z-10 flex justify-center -mt-15 mb-2 text-xs md:text-sm text-slate-400 pointer-events-none">
+        <span className="flex items-center gap-2">
+          <span className="inline-block h-1px w-8 bg-slate-500/60" />
+          Scroll to explore
+          <span className="inline-block h-1px w-8 bg-slate-500/60" />
+        </span>
+      </div>
+
       {/* ABOUT ME SECTION */}
-      <section
+      <motion.section
         id="about"
         className="relative z-10 pt-14 md:pt-18 pb-14 md:pb-16 overflow-x-hidden"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.35 }}
       >
         {/* SHAPE PUTIH DI BELAKANG */}
         <div className="pointer-events-none absolute top-24 md:top-28 left-0 right-0 bottom-10 md:bottom-14 bg-[#d9d8db] rounded-tl-[80px] md:rounded-tl-[150px] shadow-[0_20px_60px_rgba(0,0,0,0.12)]" />
 
         {/* KONTEN */}
-        <div className="relative mx-auto max-w-6xl px-4 md:px-8 lg:px-10 flex flex-col gap-10 lg:grid lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start z-10">
+        <motion.div
+          className="relative mx-auto max-w-6xl px-4 md:px-8 lg:px-10 flex flex-col gap-10 lg:grid lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start z-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true, amount: 0.4 }}
+        >
           {/* TEKS + SKILLS */}
           <div className="space-y-5 pt-16 sm:pt-18 md:pt-20 text-slate-900 flex flex-col items-center lg:items-start text-center lg:text-left">
             <h2 className="text-slate-800 font-bold leading-tight">
@@ -280,8 +371,8 @@ function App() {
               <Lanyard position={[0, 0, 13]} gravity={[0, -40, 0]} />
             </div>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* MARQUEE */}
       <div className="relative z-10 text-white/30 pointer-events-none">
@@ -295,10 +386,14 @@ function App() {
       </div>
 
       {/* MY PROJECT SECTION */}
-      <section
+      <motion.section
         id="projects"
         className="relative z-50 mt-16 md:mt-24 px-4 md:px-8 lg:px-12"
         style={{ pointerEvents: "auto" }}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
       >
         {/* heading */}
         <div className="mx-auto max-w-5xl text-center mb-10 md:mb-14">
@@ -325,7 +420,13 @@ function App() {
         </div>
 
         {/* Card */}
-        <div className="relative z-50 mx-auto max-w-6xl">
+        <motion.div
+          className="relative z-50 mx-auto max-w-6xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true, amount: 0.35 }}
+        >
           <Carousel
             opts={{
               align: "start",
@@ -453,7 +554,7 @@ function App() {
                                 style={{ pointerEvents: "auto" }}
                               >
                                 <span>Live demo</span>
-                                <span className="text-[13px]">↗</span>
+                                <ArrowUpRight className="h-3.5 w-3.5" />
                               </button>
                             )}
 
@@ -483,8 +584,8 @@ function App() {
               ))}
             </CarouselContent>
           </Carousel>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Certifications */}
       <section
@@ -540,16 +641,22 @@ function App() {
 
       {/* PROJECT DETAIL OVERLAY */}
       {selectedProject && (
-        <div
+        <motion.div
           className="fixed inset-0 z-999 flex items-center justify-center bg-slate-950/80 backdrop-blur-xl px-4"
           style={{ pointerEvents: "auto" }}
           onClick={() => setSelectedProject(null)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
         >
-          <div
+          <motion.div
             className="relative w-full max-w-5xl rounded-3xl border border-slate-800/70 
                 bg-slate-900/90 shadow-[0_32px_120px_rgba(15,23,42,0.95)] overflow-hidden"
             style={{ pointerEvents: "auto" }}
             onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
           >
             {/* header image */}
             <div className="relative h-72 md:h-96 overflow-hidden bg-slate-950 flex items-center justify-center">
@@ -634,7 +741,7 @@ function App() {
                         style={{ pointerEvents: "auto" }}
                       >
                         <span>Live demo</span>
-                        <span className="text-[13px]">↗</span>
+                        <ArrowUpRight className="h-3.5 w-3.5" />
                       </button>
                     )}
 
@@ -647,7 +754,7 @@ function App() {
                           className="inline-flex items-center gap-1.5 rounded-full border border-slate-600 px-4 py-1.5 text-xs font-semibold text-slate-200 hover:border-slate-300 hover:text-white cursor-pointer"
                         >
                           <span>View code</span>
-                          <span className="text-[13px]">↗</span>
+                          <ArrowUpRight className="h-3.5 w-3.5" />
                         </a>
                       )}
                   </div>
@@ -676,15 +783,19 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
 
       {/* GET IN TOUCH */}
-      <section
+      <motion.section
         id="contact"
         className="relative z-10 -mt-42 px-4 md:px-8 lg:px-12 pb-20"
         style={{ isolation: "isolate" }}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
       >
         {/* dekorasi glow belakang */}
         <div
@@ -692,7 +803,7 @@ function App() {
                bg-[#5227ff] opacity-30 blur-3xl"
         />
 
-        <div
+        <motion.div
           className="relative mx-auto max-w-4xl rounded-3xl border border-slate-800/70 
                 bg-slate-900/70 backdrop-blur-xl px-6 py-8 md:px-10 md:py-10 
                 shadow-[0_24px_80px_rgba(15,23,42,0.9)]"
@@ -702,6 +813,10 @@ function App() {
             zIndex: 1,
             pointerEvents: "auto",
           }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true, amount: 0.4 }}
         >
           {/* label kecil */}
           <p className="text-xs font-semibold tracking-[0.35em] uppercase text-slate-400 mb-3">
@@ -836,13 +951,13 @@ function App() {
                   style={{ pointerEvents: "auto" }}
                 >
                   Download CV
-                  <span className="ml-1.5 text-xs">↗</span>
+                  <ArrowUpRight className="ml-1.5 h-3.5 w-3.5" />
                 </a>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Floating AI Chatbot */}
       <ChatWidget />

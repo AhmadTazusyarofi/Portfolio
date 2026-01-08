@@ -278,10 +278,10 @@ button:focus-visible {
   * {
     @apply border-border outline-ring/50;
     scroll-behavior: smooth;
+    font-family: "Roboto Condensed", sans-serif !important;
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Roboto Condensed", sans-serif;
   }
 }
 
