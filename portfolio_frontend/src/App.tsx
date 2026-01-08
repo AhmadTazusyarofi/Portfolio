@@ -280,10 +280,11 @@ function App() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.35 }}
           >
+            {/* @ts-expect-error custom Spline web component not typed in JSX.IntrinsicElements */}
             <spline-viewer
               className="w-full h-full max-w-[460px] md:max-w-[520px]"
               url="https://prod.spline.design/Whk7sxwg9nLOyMlS/scene.splinecode"
-            ></spline-viewer>
+            />
           </motion.div>
         </motion.section>
       </main>
