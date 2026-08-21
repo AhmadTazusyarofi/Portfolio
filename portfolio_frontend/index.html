@@ -5,14 +5,59 @@
     <link rel="icon" type="image/svg+xml" href="/src/assets/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Google Fonts -->
+    <title>Ahmad Tazusyarofi — Web Developer</title>
+    <meta
+      name="description"
+      content="Ahmad Tazusyarofi is a web developer from Indonesia building smooth, interactive interfaces with React, TypeScript, and Laravel. See selected client work and get in touch."
+    />
+    <meta name="author" content="Ahmad Tazusyarofi" />
+    <link rel="canonical" href="https://www.ahmadtazusyarofi.my.id/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ahmad Tazusyarofi" />
+    <meta property="og:title" content="Ahmad Tazusyarofi — Web Developer" />
+    <meta
+      property="og:description"
+      content="Web developer from Indonesia building smooth, interactive interfaces with React, TypeScript, and Laravel."
+    />
+    <meta property="og:url" content="https://www.ahmadtazusyarofi.my.id/" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ahmad Tazusyarofi — Web Developer" />
+    <meta
+      name="twitter:description"
+      content="Web developer from Indonesia building smooth, interactive interfaces with React, TypeScript, and Laravel."
+    />
+
+    <!--
+      Google Fonts dimuat tanpa menahan render. <link rel="stylesheet"> biasa
+      memblokir paint pertama sampai CSS-nya tiba dari server pihak ketiga.
+      Trik media="print" membuat browser mengunduhnya dengan prioritas rendah
+      dan baru menerapkannya setelah selesai; <noscript> menjaga font tetap
+      termuat kalau JavaScript dimatikan.
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Archivo+Black&display=swap"
-      rel="stylesheet"
     />
-    <title>AhmadTazusyarofi</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Archivo+Black&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Archivo+Black&display=swap"
+      />
+    </noscript>
   </head>
   <body>
     <div id="root"></div>

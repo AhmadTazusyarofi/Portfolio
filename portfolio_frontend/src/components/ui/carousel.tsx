@@ -222,7 +222,7 @@ function CarouselPrevious(
         scrollPrev();
       }}
       className={cn(
-        "pointer-events-auto absolute left-2 top-1/2 z-40 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700/70 bg-slate-900/80 text-slate-100 shadow-md backdrop-blur-md transition hover:border-slate-400 hover:text-white",
+        "pointer-events-auto absolute left-2 top-1/2 z-40 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-secondary bg-background text-secondary transition-colors hover:bg-secondary hover:text-background",
         props.className
       )}
       aria-label="Previous slide"
@@ -244,7 +244,7 @@ function CarouselNext(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
         scrollNext();
       }}
       className={cn(
-        "pointer-events-auto absolute right-2 top-1/2 z-40 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700/70 bg-slate-900/80 text-slate-100 shadow-md backdrop-blur-md transition hover:border-slate-400 hover:text-white",
+        "pointer-events-auto absolute right-2 top-1/2 z-40 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-secondary bg-background text-secondary transition-colors hover:bg-secondary hover:text-background",
         props.className
       )}
       aria-label="Next slide"

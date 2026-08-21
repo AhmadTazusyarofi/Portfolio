@@ -1,7 +1,11 @@
+/* `overflow-x: clip` memotong luapan horizontal TANPA membuat scroll
+   container. Kalau memakai `hidden`, spesifikasi memaksa sumbu Y menjadi
+   `auto` dan tiap elemen jadi punya scrollbar vertikalnya sendiri.
+   `max-width: 100vw` juga dibuang: 100vw sudah termasuk lebar scrollbar,
+   jadi justru memicu overflow yang mau dicegah. */
 html,
 body {
-  overflow-x: hidden;
-  max-width: 100vw;
+  overflow-x: clip;
 }
 
 * {

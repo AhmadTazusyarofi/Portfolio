@@ -156,9 +156,10 @@ button:focus-visible {
   * {
     @apply border-border outline-ring/50;
   }
-  html {
-    scroll-behavior: smooth;
-  }
+  /* Smooth scroll ditangani Lenis (lihat lib/useSmoothScroll.ts).
+     `scroll-behavior: smooth` bawaan CSS harus dilepas karena keduanya akan
+     saling berebut kendali posisi scroll. Untuk pengguna dengan
+     prefers-reduced-motion, Lenis tidak diaktifkan dan scroll kembali normal. */
   body {
     @apply bg-background text-foreground font-sans;
   }
