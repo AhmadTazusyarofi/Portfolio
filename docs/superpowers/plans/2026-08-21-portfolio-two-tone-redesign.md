@@ -29,6 +29,20 @@ Sebagai gantinya, **setiap task memakai siklus verifikasi tiga langkah ini**, da
 
 1. `npm run build` — menjalankan `tsc -b` dengan `noUnusedLocals` dan `noUnusedParameters` menyala. Ini jaring pengaman utama: import yang menggantung setelah komponen dihapus, prop yang salah tipe, dan variabel sisa akan **menggagalkan build**. Perlakukan build yang gagal seperti test yang gagal.
 2. `npm run lint` — ESLint dengan `typescript-eslint` + `react-hooks`.
+
+   **Lint sudah gagal sejak sebelum pekerjaan ini dimulai.** Baseline yang
+   terukur di commit `4407e90` (commit terakhir sebelum branch `redesign/two-tone`)
+   adalah **54 problems: 44 errors, 10 warnings**, tersebar di `CircularText`,
+   `Lanyard`, `LaserFlow`, `LogoLoop`, `MetallicPaint`, `RotatingText`,
+   `SplitText`, `StaggeredMenu`, `TextPressure`, `TextType`, `ui/button.tsx`,
+   `global.d.ts`, dan `lib/svg.d.ts` — hampir semuanya kode ReactBits dan shadcn
+   yang disalin apa adanya. Memperbaikinya berada di luar scope plan ini.
+
+   Jadi kriterianya bukan "lolos", melainkan: **jumlah error tidak boleh naik
+   dari angka baseline task sebelumnya.** Angkanya justru akan turun sendiri
+   saat Task 2 dan 3 menghapus `CircularText`, `LaserFlow`, `TextPressure`,
+   `TextType`, dan `StaggeredMenu`. Catat angkanya di tiap task, dan kalau naik,
+   berhenti — berarti kode baru yang menyebabkannya.
 3. Pemeriksaan visual di `npm run dev`, pada lebar desktop **dan** mobile (≤640px).
 
 Jangan pernah menyatakan sebuah task selesai tanpa menjalankan ketiganya dan melihat hasilnya.
@@ -149,7 +163,7 @@ Expected: tidak ada hasil yang menambahkan class `dark` ke elemen. Kalau ada, he
 - [ ] **Step 7: Jalankan build dan lint**
 
 Run: `npm run build && npm run lint`
-Expected: keduanya lolos tanpa error.
+Expected: build lolos; lint tetap di baseline 44 errors / 10 warnings (Task 1 tidak menyentuh file .ts/.tsx sama sekali, jadi angkanya harus persis sama).
 
 - [ ] **Step 8: Pemeriksaan visual**
 
@@ -280,7 +294,7 @@ Expected: tidak ada hasil.
 - [ ] **Step 9: Jalankan build dan lint**
 
 Run: `npm run build && npm run lint`
-Expected: keduanya lolos. Kalau `tsc` mengeluh tentang variabel tak terpakai, itu sisa yang belum dibersihkan dari Step 4 — bereskan, jangan dibungkam.
+Expected: build lolos; error lint **turun** dari 44 karena `CircularText`, `LaserFlow`, `TextPressure`, dan `TextType` ikut terhapus. Kalau `tsc` mengeluh tentang variabel tak terpakai, itu sisa yang belum dibersihkan dari Step 4 — bereskan, jangan dibungkam.
 
 - [ ] **Step 10: Pemeriksaan visual**
 
@@ -810,7 +824,7 @@ Expected: tidak ada hasil.
 - [ ] **Step 6: Jalankan build dan lint**
 
 Run: `npm run build && npm run lint`
-Expected: keduanya lolos.
+Expected: build lolos; jumlah error lint tidak naik dari baseline task sebelumnya.
 
 - [ ] **Step 7: Pemeriksaan visual**
 
@@ -979,7 +993,7 @@ Pada div terluar di `App.tsx`, ganti `bg-slate-900` menjadi `bg-background`:
 - [ ] **Step 5: Jalankan build dan lint**
 
 Run: `npm run build && npm run lint`
-Expected: keduanya lolos.
+Expected: build lolos; jumlah error lint tidak naik dari baseline task sebelumnya.
 
 - [ ] **Step 6: Pemeriksaan visual**
 
@@ -1132,7 +1146,7 @@ Class `.text-outline` di `App.css` memakai `-webkit-text-stroke-color: currentCo
 - [ ] **Step 4: Jalankan build dan lint**
 
 Run: `npm run build && npm run lint`
-Expected: keduanya lolos.
+Expected: build lolos; jumlah error lint tidak naik dari baseline task sebelumnya.
 
 - [ ] **Step 5: Pemeriksaan visual**
 
@@ -1496,7 +1510,7 @@ Hapus konstanta `projects` dari `App.tsx`. Bersihkan import `Carousel`, `Carouse
 - [ ] **Step 4: Jalankan build dan lint**
 
 Run: `npm run build && npm run lint`
-Expected: keduanya lolos.
+Expected: build lolos; jumlah error lint tidak naik dari baseline task sebelumnya.
 
 - [ ] **Step 5: Pemeriksaan visual**
 
@@ -1885,7 +1899,7 @@ Expected: tidak ada hasil. Kalau masih ada, bereskan sebelum lanjut.
 - [ ] **Step 5: Jalankan build dan lint**
 
 Run: `npm run build && npm run lint`
-Expected: keduanya lolos.
+Expected: build lolos; jumlah error lint tidak naik dari baseline task sebelumnya.
 
 - [ ] **Step 6: Konfirmasi App.tsx sudah ramping**
 
@@ -1916,7 +1930,7 @@ git commit -m "Ekstrak Contact dan Toast, rampingkan App.tsx jadi perangkai sect
 
 ## Definition of Done
 
-- [ ] `npm run build` dan `npm run lint` lolos
+- [ ] `npm run build` lolos, dan jumlah error `npm run lint` tidak lebih tinggi dari baseline 44
 - [ ] `grep -rn "slate-\|#5227ff\|#d9d8db\|emerald-" src/` tidak menghasilkan apa pun
 - [ ] `grep -rn "pointerEvents" src/` tidak menghasilkan apa pun
 - [ ] `src/App.tsx` di bawah 150 baris
