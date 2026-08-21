@@ -10,13 +10,10 @@ import {
 import BlurText from "./components/BlurText";
 import ChatWidget from "./components/ChatWidget";
 import DecryptedText from "./components/DecryptedText";
-import DomeGallery from "./components/DomeGallery";
 import Lanyard from "./components/Lanyard";
-import LaserFlow from "./components/LaserFlow";
 import LoadingScreen from "./components/LoadingScreen";
 import LogoLoop from "./components/LogoLoop";
 import { parseLogoImage } from "./components/MetallicPaint";
-import Ribbons from "./components/Ribbons";
 import RotatingText from "./components/RotatingText";
 import ScrollReveal from "./components/ScrollReveal";
 import ScrollVelocity from "./components/ScrollVelocity";
@@ -94,11 +91,6 @@ function App() {
     { label: "Home", ariaLabel: "Go to home page", link: "#home" },
     { label: "About", ariaLabel: "Learn about us", link: "#about" },
     { label: "MyProject", ariaLabel: "View our my project", link: "#projects" },
-    {
-      label: "Certifications",
-      ariaLabel: "View our my certifications",
-      link: "#certifications",
-    },
     { label: "Contact", ariaLabel: "Get in touch", link: "#contact" },
   ];
 
@@ -133,31 +125,8 @@ function App() {
     }, 3000);
   };
 
-  const headingVariants = {
-    hidden: { opacity: 0, y: 24 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  } as const;
-
   return (
     <div className="relative min-h-screen bg-slate-900 overflow-x-hidden">
-      {/* RIBBONS BACKGROUND */}
-      <div className="pointer-events-none fixed inset-0" style={{ zIndex: 10 }}>
-        <Ribbons
-          baseThickness={30}
-          colors={["#5227FF"]}
-          speedMultiplier={0.5}
-          maxAge={500}
-          enableFade={false}
-        />
-      </div>
-
       {/* MENU */}
       <div className="fixed top-6 right-6 z-50">
         <StaggeredMenu
@@ -193,22 +162,6 @@ function App() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           >
-            {/* TextPressure opsional */}
-            {/* <div className="flex items-center justify-center md:justify-start w-full">
-              <TextPressure
-                text="Welcome!"
-                flex
-                alpha={false}
-                stroke={false}
-                width
-                weight
-                italic
-                textColor="#ffffff"
-                strokeColor="#ff0000"
-                minFontSize={300}
-              />
-            </div> */}
-
             <div className="flex flex-col items-center md:items-start gap-3">
               {/* Baris pertama: SplitText */}
               <SplitText
@@ -253,12 +206,10 @@ function App() {
 
             <div
               className="mt-4 flex flex-wrap gap-3"
-              style={{ pointerEvents: "auto" }}
             >
               <a
                 href="#projects"
                 className="inline-flex items-center justify-center rounded-full bg-[#5227ff] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#5227ff]/40 hover:shadow-[#5227ff]/60 hover:-translate-y-0.5 transition-transform duration-200"
-                style={{ pointerEvents: "auto" }}
               >
                 View my work
               </a>
@@ -266,26 +217,12 @@ function App() {
               <a
                 href="#contact"
                 className="inline-flex items-center justify-center rounded-full border border-slate-500 px-4 py-2.5 text-sm font-semibold text-slate-100 hover:border-slate-300 hover:text-white hover:-translate-y-0.5 transition-transform duration-200"
-                style={{ pointerEvents: "auto" }}
               >
                 Contact me
               </a>
             </div>
           </motion.div>
 
-          {/* KANAN: ROBOT / SPLINE */}
-          <motion.div
-            className="w-full md:w-1/2 h-80 sm:h-[380px] md:h-[450px] lg:h-[520px] mx-auto md:pl-8 lg:pl-16 flex justify-center md:justify-end order-1 md:order-2"
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.35 }}
-          >
-            {/* @ts-expect-error custom Spline web component not typed in JSX.IntrinsicElements */}
-            <spline-viewer
-              className="w-full h-full max-w-[460px] md:max-w-[520px]"
-              url="https://prod.spline.design/Whk7sxwg9nLOyMlS/scene.splinecode"
-            />
-          </motion.div>
         </motion.section>
       </main>
 
@@ -390,7 +327,6 @@ function App() {
       <motion.section
         id="projects"
         className="relative z-50 mt-16 md:mt-24 px-4 md:px-8 lg:px-12"
-        style={{ pointerEvents: "auto" }}
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
@@ -448,7 +384,6 @@ function App() {
                  hover:-translate-y-3 hover:shadow-[0_25px_70px_rgba(15,23,42,0.9)]"
                     style={{
                       isolation: "isolate",
-                      pointerEvents: "auto",
                     }}
                   >
                     {/* gradient glow belakang card */}
@@ -465,7 +400,6 @@ function App() {
                     {/* isi card */}
                     <div
                       className="relative z-40 flex h-full flex-col rounded-2xl bg-slate-950/70 backdrop-blur-xl overflow-hidden transition-colors duration-300 group-hover:bg-slate-950"
-                      style={{ pointerEvents: "auto" }}
                     >
                       {/* image */}
                       <div className="relative overflow-hidden rounded-t-2xl bg-slate-900 flex items-center justify-center h-52">
@@ -552,7 +486,6 @@ function App() {
                              transition-all duration-200
                              hover:bg-white hover:-translate-y-0.5 cursor-pointer
                              group-hover:-translate-y-0.5"
-                                style={{ pointerEvents: "auto" }}
                               >
                                 <span>Live demo</span>
                                 <ArrowUpRight className="h-3.5 w-3.5" />
@@ -571,7 +504,6 @@ function App() {
                              transition-all duration-200
                              hover:border-slate-300 hover:text-white cursor-pointer
                              group-hover:border-slate-300 group-hover:text-white"
-                                style={{ pointerEvents: "auto" }}
                               >
                                 <span>Details Project</span>
                               </button>
@@ -588,63 +520,10 @@ function App() {
         </motion.div>
       </motion.section>
 
-      {/* Certifications */}
-      <section
-        className="relative z-10 mt-15 md:mt-16 px-4 overflow-x-hidden"
-        id="certifications"
-      >
-        {/* Heading yang BERULANG animasinya */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.7 }} // <= BUKAN once:true
-          className="mb-8 md:mb-10"
-        >
-          <motion.h2
-            variants={headingVariants}
-            className="text-center text-4xl md:text-5xl font-bold text-slate-50 mb-2"
-          >
-            Certifications
-          </motion.h2>
-
-          <motion.p
-            variants={headingVariants}
-            transition={{ delay: 0.08 }} // sedikit delay biar collapse-nya enak
-            className="text-center text-sm md:text-xl text-slate-400"
-          >
-            A snapshot of courses and certifications I’ve completed to sharpen
-            my skills as a web developer.
-          </motion.p>
-        </motion.div>
-
-        <div
-          className="flex items-center justify-center mx-auto -mt-30"
-          style={{ maxWidth: "100%", height: "100vh" }}
-        >
-          <div style={{ width: "100%", maxWidth: "1200px", height: "100%" }}>
-            <DomeGallery overlayBlurColor="transparent" grayscale={false} />
-          </div>
-        </div>
-
-        {/* Laser Flow */}
-        <div className="relative mx-auto mt-[-125px] h-[380px] w-full max-w-5xl flex items-center justify-center overflow-hidden">
-          <LaserFlow
-            className="rounded-4xl overflow-hidden"
-            horizontalBeamOffset={0}
-            verticalBeamOffset={-0.05}
-            flowSpeed={0.35}
-            fogIntensity={0.55}
-            wispDensity={1.1}
-            color="#5227ff"
-          />
-        </div>
-      </section>
-
       {/* PROJECT DETAIL OVERLAY */}
       {selectedProject && (
         <motion.div
           className="fixed inset-0 z-999 flex items-center justify-center bg-slate-950/80 backdrop-blur-xl px-4"
-          style={{ pointerEvents: "auto" }}
           onClick={() => setSelectedProject(null)}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -653,7 +532,6 @@ function App() {
           <motion.div
             className="relative w-full max-w-5xl rounded-3xl border border-slate-800/70 
                 bg-slate-900/90 shadow-[0_32px_120px_rgba(15,23,42,0.95)] overflow-hidden"
-            style={{ pointerEvents: "auto" }}
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -682,7 +560,6 @@ function App() {
                 type="button"
                 onClick={() => setSelectedProject(null)}
                 className="absolute right-5 top-5 inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-950/80 text-slate-200 text-sm font-semibold border border-slate-700 hover:bg-slate-800 hover:text-white cursor-pointer"
-                style={{ pointerEvents: "auto" }}
               >
                 ×
               </button>
@@ -739,7 +616,6 @@ function App() {
                           );
                         }}
                         className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 text-slate-900 px-4 py-1.5 text-xs font-semibold tracking-wide hover:bg-white hover:-translate-y-0.5 transition-transform duration-200 cursor-pointer"
-                        style={{ pointerEvents: "auto" }}
                       >
                         <span>Live demo</span>
                         <ArrowUpRight className="h-3.5 w-3.5" />
@@ -773,7 +649,6 @@ function App() {
                     type="button"
                     onClick={() => setSelectedProject(null)}
                     className="inline-flex items-center justify-center rounded-full bg-slate-800/80 px-4 py-2 text-xs font-semibold text-slate-100 hover:bg-slate-700 cursor-pointer"
-                    style={{ pointerEvents: "auto" }}
                   >
                     Close
                   </button>
@@ -812,7 +687,6 @@ function App() {
             isolation: "isolate",
             position: "relative",
             zIndex: 1,
-            pointerEvents: "auto",
           }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -857,7 +731,6 @@ function App() {
                 href="mailto:tazusyaroffiahmad@gmail.com"
                 className="text-sm text-slate-100 underline underline-offset-4 decoration-slate-500/60 
                      hover:decoration-[#5227ff] hover:text-white transition-colors cursor-pointer"
-                style={{ pointerEvents: "auto" }}
               >
                 tazusyaroffiahmad@gmail.com
               </a>
@@ -878,7 +751,6 @@ function App() {
                     className="inline-flex items-center gap-1.5 rounded-full bg-slate-800/80 
                          px-3 py-1.5 text-xs font-medium text-slate-100
                          hover:bg-[#E1306C] hover:text-white transition-colors cursor-pointer"
-                    style={{ pointerEvents: "auto" }}
                   >
                     <Instagram className="w-4 h-4" />
                     <span>Instagram</span>
@@ -891,7 +763,6 @@ function App() {
                     className="inline-flex items-center gap-1.5 rounded-full bg-slate-800/80 
                          px-3 py-1.5 text-xs font-medium text-slate-100
                          hover:bg-black hover:text-white transition-colors cursor-pointer"
-                    style={{ pointerEvents: "auto" }}
                   >
                     <Twitter className="w-4 h-4" />
                     <span>Twitter</span>
@@ -904,7 +775,6 @@ function App() {
                     className="inline-flex items-center gap-1.5 rounded-full bg-slate-800/80 
                          px-3 py-1.5 text-xs font-medium text-slate-100
                          hover:bg-slate-950 hover:text-white transition-colors cursor-pointer"
-                    style={{ pointerEvents: "auto" }}
                   >
                     <Github className="w-4 h-4" />
                     <span>GitHub</span>
@@ -917,7 +787,6 @@ function App() {
                     className="inline-flex items-center gap-1.5 rounded-full bg-slate-800/80 
                          px-3 py-1.5 text-xs font-medium text-slate-100
                          hover:bg-[#0A66C2] hover:text-white transition-colors cursor-pointer"
-                    style={{ pointerEvents: "auto" }}
                   >
                     <Linkedin className="w-4 h-4" />
                     <span>LinkedIn</span>
@@ -937,7 +806,6 @@ function App() {
        px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#5227ff]/40
        hover:shadow-[#5227ff]/60 hover:-translate-y-0.5 
        transition-shadow duration-200 cursor-pointer"
-                  style={{ pointerEvents: "auto" }}
                 >
                   Say hello
                   <span className="ml-1.5 text-base">👋</span>
@@ -949,7 +817,6 @@ function App() {
                   className="inline-flex items-center justify-center rounded-full border border-slate-600 
        px-4 py-2.5 text-sm font-semibold text-slate-200
        hover:border-slate-300 hover:text-white hover:-translate-y-0.5 transition-transform duration-200 cursor-pointer"
-                  style={{ pointerEvents: "auto" }}
                 >
                   Download CV
                   <ArrowUpRight className="ml-1.5 h-3.5 w-3.5" />
@@ -972,13 +839,9 @@ function App() {
             y: isToastVisible ? 0 : 20,
           }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-4 left-0 right-0 z-999 px-4 sm:bottom-6"
-          style={{ pointerEvents: "none" }}
+          className="pointer-events-none fixed bottom-4 left-0 right-0 z-999 px-4 sm:bottom-6"
         >
-          <div
-            className="mx-auto flex w-full max-w-lg items-start gap-3 rounded-2xl border border-slate-700/80 bg-slate-900/95 px-4 py-3 shadow-[0_18px_45px_rgba(15,23,42,0.9)] backdrop-blur-xl"
-            style={{ pointerEvents: "auto" }}
-          >
+          <div className="pointer-events-auto mx-auto flex w-full max-w-lg items-start gap-3 rounded-2xl border border-slate-700/80 bg-slate-900/95 px-4 py-3 shadow-[0_18px_45px_rgba(15,23,42,0.9)] backdrop-blur-xl">
             <div className="mt-1 h-2 w-2 rounded-full bg-emerald-400" />
             <div className="flex-1">
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-400 mb-1">
