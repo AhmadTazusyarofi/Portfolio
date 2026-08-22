@@ -7,16 +7,34 @@ export type ProjectItem = {
   tech: string[];
   liveUrl?: string;
   codeUrl?: string;
+  /** Gambar pendukung di halaman detail. Kosongkan kalau belum ada —
+   *  section galerinya tidak dirender sama sekali. */
+  gallery?: string[];
 };
 
+import archistruct from "../assets/project/Archistruct/Screenshot (59).png";
+import archistruct1 from "../assets/project/Archistruct/Screenshot (67).png";
+import archistruct2 from "../assets/project/Archistruct/Screenshot (68).png";
+import archistruct3 from "../assets/project/Archistruct/Screenshot (69).png";
+import archistruct4 from "../assets/project/Archistruct/Screenshot (61).png";
 import article from "../assets/project/article.webp";
+import visitCiremai from "../assets/project/VisitCiremai/Screenshot (73).png";
+import visitCiremai1 from "../assets/project/VisitCiremai/Screenshot (74).png";
+import visitCiremai2 from "../assets/project/VisitCiremai/Screenshot (76).png";
+import visitCiremai3 from "../assets/project/VisitCiremai/Screenshot (77).png";
+import visitCiremai4 from "../assets/project/VisitCiremai/Screenshot (78).png";
+import visitCiremai5 from "../assets/project/VisitCiremai/Screenshot (79).png";
 import burgerBangor from "../assets/project/burger-bangor.webp";
 import dashboardKMP from "../assets/project/dashboard-kmp.webp";
 import ecommerce from "../assets/project/e-commerce.webp";
-import inventory from "../assets/project/inventory.webp";
 import marketplace from "../assets/project/marketplace.webp";
 import portalKoperasi from "../assets/project/portal-kmp.webp";
 import ruyukImg from "../assets/project/ruyuk.webp";
+import ruyuk1 from "../assets/project/RuyukOutdoor/Capture.png";
+import ruyuk2 from "../assets/project/RuyukOutdoor/Capture2.png";
+import ruyuk3 from "../assets/project/RuyukOutdoor/Capture3.png";
+import ruyuk4 from "../assets/project/RuyukOutdoor/Capture4.png";
+import ruyuk5 from "../assets/project/RuyukOutdoor/Capture5.png";
 import sispak from "../assets/project/sispak.webp";
 import tkIslam from "../assets/project/tkislam.webp";
 import travel from "../assets/project/travel.webp";
@@ -39,26 +57,53 @@ export const PROJECTS: ProjectItem[] = [
     ],
     liveUrl: "https://ruyuk-outdoor.vercel.app/",
     codeUrl: "#",
+    gallery: [ruyuk1, ruyuk2, ruyuk3, ruyuk4, ruyuk5],
   },
   {
-    id: "dashboard-inventory",
-    title: "Goods Inventory Dashboard",
+    id: "archistruct",
+    title: "Archistruct",
     role: "Client Project",
     description:
-      "A goods inventory dashboard designed to track stock levels, item categories, and movement history in real time. Built to help businesses manage assets efficiently with clear analytics, smooth interactions, and an intuitive workflow.",
-    image: inventory,
+      "A company profile website for an architecture and construction firm in Jakarta, spanning four pages: home, services, portfolio, and about. The site presents architectural design, interior design, and construction work through a monochrome layout where large photography and Archivo Black display type carry the weight. Page transitions and scroll reveals keep the browsing calm rather than flashy, and every section is composed to let the projects themselves stay the focus.",
+    image: archistruct,
     tech: [
       "React",
-      "Express.Js",
-      "Phrisma",
       "TypeScript",
       "Vite",
       "TailwindCSS",
+      "React Router",
       "Framer Motion",
-      "ShadCn",
     ],
-    liveUrl: "https://dashboard-inventorybarang.netlify.app/",
+    liveUrl: "#",
     codeUrl: "#",
+    gallery: [archistruct1, archistruct2, archistruct3, archistruct4],
+  },
+  {
+    id: "visit-ciremai",
+    title: "Visit Ciremai",
+    role: "Client Project",
+    description:
+      "A redesign of the existing Visit Ciremai website into a full travel platform for the Mount Ciremai area, covering hiking packages, adventure trips, lodging, transport, and outdoor gear rental. Visitors browse and search packages, submit bookings, and leave testimonials; an admin dashboard behind cookie-based authentication handles package CRUD, image uploads, booking status, and testimonial moderation. Every configuration value lives in environment files rather than in the code, and the build refuses to run when a required one is missing.",
+    image: visitCiremai,
+    tech: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "TailwindCSS",
+      "Express.Js",
+      "MySQL",
+      "Zod",
+      "JWT",
+    ],
+    liveUrl: "#",
+    codeUrl: "#",
+    gallery: [
+      visitCiremai1,
+      visitCiremai2,
+      visitCiremai3,
+      visitCiremai4,
+      visitCiremai5,
+    ],
   },
   {
     id: "marketplace",

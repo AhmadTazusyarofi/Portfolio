@@ -5,9 +5,24 @@ import { Link } from "react-router-dom";
 import ProjectCard from "@/components/ProjectCard";
 import { PROJECTS } from "@/lib/utils-project";
 
-/* Empat teratas di utils-project.ts adalah client project — yang paling layak
-   ditampilkan sebagai "Featured". Ubah irisan ini kalau urutannya berubah. */
-const FEATURED = PROJECTS.slice(0, 4);
+/* Ditulis eksplisit per id, bukan PROJECTS.slice(0, 4). Dengan irisan, setiap
+   project baru yang disisipkan di atas akan diam-diam mendorong satu project
+   keluar dari beranda. Di sini urutan tampilnya mengikuti urutan daftar ini,
+   dan urutan di /work tetap independen. */
+const FEATURED_IDS = [
+  "ruyuk-outdoor",
+  "archistruct",
+  "visit-ciremai",
+  "portal-kmp",
+];
+
+/* flatMap, bukan filter(Boolean): filter tidak mempersempit tipe, sedangkan
+   flatMap dengan array kosong membuang id yang tidak ketemu sekaligus
+   menghasilkan ProjectItem[] yang benar. */
+const FEATURED = FEATURED_IDS.flatMap((id) => {
+  const project = PROJECTS.find((item) => item.id === id);
+  return project ? [project] : [];
+});
 
 export default function Projects() {
   return (
