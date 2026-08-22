@@ -1,12 +1,16 @@
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { useHashNav } from "@/lib/useHashNav";
+
 const CONTACT_EMAIL = "tazusyaroffiahmad@gmail.com";
 
+/* Href absolut ("/#about"), bukan hash telanjang: dari /work dan /work/:slug,
+   "#about" hanya menempel di URL saat ini dan tidak membawa ke mana pun. */
 const NAVIGATE = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/#about" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 function jakartaTime() {
@@ -19,6 +23,7 @@ function jakartaTime() {
 }
 
 export default function Footer() {
+  const handleNavClick = useHashNav();
   const [time, setTime] = useState(jakartaTime);
 
   useEffect(() => {
@@ -60,7 +65,10 @@ export default function Footer() {
             </div>
           </div>
 
-          <nav aria-label="Footer" className="md:justify-self-end md:text-right">
+          <nav
+            aria-label="Footer"
+            className="md:justify-self-end md:text-right"
+          >
             <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-background opacity-50">
               Navigate
             </p>
@@ -69,6 +77,7 @@ export default function Footer() {
                 <li key={label}>
                   <a
                     href={href}
+                    onClick={(e) => handleNavClick(href, e)}
                     className="text-sm text-background underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
                   >
                     {label}

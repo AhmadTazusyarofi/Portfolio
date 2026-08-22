@@ -20,7 +20,8 @@ export default function ProjectDetail() {
   const nextProject =
     index === -1 ? undefined : PROJECTS[(index + 1) % PROJECTS.length];
 
-  const [isImageOpen, setIsImageOpen] = useState(false);
+  // Satu lightbox dipakai bersama: null = tertutup, selain itu src yang dibuka.
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isToastVisible, setIsToastVisible] = useState(false);
 
@@ -48,6 +49,8 @@ export default function ProjectDetail() {
       </main>
     );
   }
+
+  const gallery = project.gallery ?? [];
 
   const openLiveDemo = () => {
     if (!project.liveUrl || project.liveUrl === "#") {
@@ -79,7 +82,7 @@ export default function ProjectDetail() {
 
           <button
             type="button"
-            onClick={() => setIsImageOpen(true)}
+            onClick={() => setLightboxSrc(project.image)}
             aria-label={`Lihat gambar ${project.title} ukuran penuh`}
             className="mt-12 flex aspect-16/10 w-full cursor-zoom-in items-center justify-center overflow-hidden rounded-3xl border border-secondary p-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
           >
@@ -129,6 +132,44 @@ export default function ProjectDetail() {
             </div>
           </div>
 
+          {gallery.length > 0 && (
+            <section className="mt-20 md:mt-28">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-secondary opacity-60">
+                Project gallery
+              </p>
+
+              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {gallery.map((src, i) => {
+                  /* Jumlah ganjil akan menyisakan gambar terakhir sendirian
+                     selebar setengah kolom. Dilebarkan penuh agar barisnya
+                     tidak terlihat menggantung. */
+                  const isLoneLast =
+                    gallery.length % 2 === 1 && i === gallery.length - 1;
+
+                  return (
+                    <button
+                      key={src}
+                      type="button"
+                      onClick={() => setLightboxSrc(src)}
+                      aria-label={`Lihat gambar ${i + 1} dari ${project.title}`}
+                      className={`group flex aspect-16/10 cursor-zoom-in items-center justify-center overflow-hidden rounded-2xl border border-secondary p-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary ${
+                        isLoneLast ? "sm:col-span-2" : ""
+                      }`}
+                    >
+                      <img
+                        src={src}
+                        alt={`${project.title} — tampilan ${i + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                        className="max-h-full max-w-full object-contain transition-transform duration-500 ease-out group-hover:scale-105"
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+
           {nextProject && (
             /* `group` dipertahankan hanya sebagai pemicu: kartunya sendiri
                tidak berubah saat hover, cuma lingkaran panahnya. */
@@ -159,10 +200,10 @@ export default function ProjectDetail() {
       <Footer />
 
       <ImageLightbox
-        src={project.image}
+        src={lightboxSrc ?? ""}
         alt={project.title}
-        isOpen={isImageOpen}
-        onClose={() => setIsImageOpen(false)}
+        isOpen={lightboxSrc !== null}
+        onClose={() => setLightboxSrc(null)}
       />
 
       {toastMessage && (

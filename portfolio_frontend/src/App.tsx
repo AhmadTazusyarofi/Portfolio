@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "lenis/dist/lenis.css";
 import "./App.css";
 
@@ -15,6 +15,7 @@ const AllProjects = lazy(() => import("./pages/AllProjects"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 
 import logo from "@/assets/logo.svg?url";
+import { useHashNav } from "./lib/useHashNav";
 import {
   scrollToHash,
   scrollToTop,
@@ -34,7 +35,6 @@ function App() {
   useSmoothScroll();
 
   const location = useLocation();
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [logoImageData, setLogoImageData] = useState<ImageData | null>(null);
 
@@ -90,34 +90,12 @@ function App() {
 
     const id = window.setTimeout(
       () => scrollToHash(location.hash.slice(1)),
-      120
+      120,
     );
     return () => window.clearTimeout(id);
   }, [location.pathname, location.hash]);
 
-  /* Menu memakai href absolut ("/#about") supaya tetap benar sebagai tautan
-     dan tetap bisa dibuka di tab baru. Tapi klik biasa diambil alih router,
-     jadi berpindah dari /work ke beranda tidak memuat ulang halaman. */
-  const handleNavClick = (
-    href: string,
-    event: React.MouseEvent<HTMLAnchorElement>
-  ) => {
-    // Biarkan browser menangani klik tengah / ctrl-klik (buka di tab baru).
-    if (event.defaultPrevented || event.metaKey || event.ctrlKey) return;
-
-    const [rawPath, hash] = href.split("#");
-    const path = rawPath || "/";
-
-    event.preventDefault();
-
-    if (location.pathname === path) {
-      if (hash) scrollToHash(hash);
-      else scrollToTop();
-      return;
-    }
-
-    navigate(hash ? { pathname: path, hash: `#${hash}` } : path);
-  };
+  const handleNavClick = useHashNav();
 
   // Layar loading hanya untuk kunjungan pertama ke beranda. Menahan halaman
   // detail project selama 4,8 detik hanya untuk animasi sambutan tidak masuk akal.
