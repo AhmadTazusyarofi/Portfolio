@@ -227,15 +227,14 @@ export default function ChatWidget() {
         bottom: 24,
         right: 24,
         zIndex: 999999,
-        pointerEvents: "auto",
       }}
     >
       {isOpen && (
         <div
           ref={panelRef}
-          className="w-80 max-w-[90vw] rounded-2xl border border-slate-700/70 bg-slate-900/95 shadow-2xl backdrop-blur-lg text-sm text-slate-100"
+          data-lenis-prevent
+          className="w-80 max-w-[90vw] rounded-2xl border border-secondary bg-background text-sm text-secondary"
           style={{
-            pointerEvents: "auto",
             maxHeight: 360,
             overflowY: "auto",
             display: "flex",
@@ -243,24 +242,22 @@ export default function ChatWidget() {
           }}
         >
           <div
-            className="flex items-center justify-between px-4 py-2.5 border-b border-slate-700/70 bg-slate-900 flex-none"
+            className="flex items-center justify-between px-4 py-2.5 border-b border-secondary bg-background flex-none"
             style={{
               position: "sticky",
               top: 0,
               zIndex: 1,
-              pointerEvents: "auto",
             }}
           >
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-white">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary">
                 Assistant AI
               </p>
             </div>
             <button
               type="button"
               onClick={handleToggle}
-              style={{ pointerEvents: "auto" }}
-              className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-800 text-slate-200 hover:bg-slate-700"
+              className="inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded-full border border-secondary text-secondary transition-colors hover:bg-secondary hover:text-background"
               aria-label="Close chat"
             >
               <X className="h-3.5 w-3.5" />
@@ -279,8 +276,8 @@ export default function ChatWidget() {
                   className={`max-w-[85%] rounded-2xl px-3 py-2 text-xs leading-relaxed whitespace-pre-wrap
                   ${
                     msg.role === "user"
-                      ? "bg-[#5227ff] text-white rounded-br-sm"
-                      : "bg-slate-800/90 text-slate-100 rounded-bl-sm"
+                      ? "bg-secondary text-background rounded-br-sm"
+                      : "border border-secondary text-secondary rounded-bl-sm"
                   }`}
                 >
                   {msg.content}
@@ -290,8 +287,8 @@ export default function ChatWidget() {
 
             {isLoading && (
               <div className="flex justify-start">
-                <div className="inline-flex items-center gap-2 rounded-2xl bg-slate-800/90 px-3 py-2 text-[11px] text-slate-300">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="inline-flex items-center gap-2 rounded-2xl border border-secondary px-3 py-2 text-[11px] text-secondary">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" />
                   <span>Mengetik...</span>
                 </div>
               </div>
@@ -299,9 +296,8 @@ export default function ChatWidget() {
           </div>
 
           <div
-            className="border-t border-slate-700/70 bg-slate-900/90 px-3 py-2 flex items-center gap-2 flex-none"
+            className="border-t border-secondary bg-background px-3 py-2 flex items-center gap-2 flex-none"
             style={{
-              pointerEvents: "auto",
               position: "sticky",
               bottom: 0,
               zIndex: 1,
@@ -313,14 +309,13 @@ export default function ChatWidget() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Tanyakan apa saja..."
-              style={{ pointerEvents: "auto" }}
-              className="flex-1 rounded-full bg-slate-800/80 px-3 py-1.5 text-xs text-slate-100 placeholder:text-slate-500 outline-none border border-transparent focus:border-[#5227ff]"
+              className="flex-1 rounded-full border border-secondary bg-background px-3 py-1.5 text-xs text-secondary placeholder:text-secondary placeholder:opacity-50 outline-none"
             />
             <button
               type="button"
               onClick={handleSend}
               disabled={isLoading || !input.trim()}
-              className="inline-flex items-center justify-center rounded-full bg-[#5227ff] px-3 py-1.5 text-[11px] font-semibold text-white shadow-md shadow-[#5227ff]/40 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex cursor-pointer items-center justify-center rounded-full bg-secondary px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-background disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Kirim
             </button>
@@ -330,12 +325,8 @@ export default function ChatWidget() {
 
       <button
         type="button"
-        onClick={() => {
-          console.log("chat bubble clicked");
-          handleToggle();
-        }}
-        style={{ pointerEvents: "auto" }}
-        className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#5227ff] text-white shadow-lg shadow-[#5227ff]/50 hover:shadow-[#5227ff]/70 hover:-translate-y-0.5 transition-transform"
+        onClick={handleToggle}
+        className="inline-flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-secondary text-background transition-transform hover:-translate-y-0.5"
         aria-label="Open chat"
       >
         <MessageCircleMore className="h-6 w-6" />

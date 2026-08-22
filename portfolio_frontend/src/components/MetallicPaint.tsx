@@ -303,8 +303,10 @@ void main() {
     vec4 img = texture(u_image_texture, img_uv);
     vec3 color = vec3(0.);
     float opacity = 1.;
-    vec3 color1 = vec3(.98, 0.98, 1.);
-    vec3 color2 = vec3(.1, .1, .1 + .1 * smoothstep(.7, 1.3, uv.x + uv.y));
+    // Palet portfolio: #FAF7F5 dan #000000. Nilai lama punya semburat biru
+    // di channel B dan hitam yang tidak benar-benar hitam.
+    vec3 color1 = vec3(.9804, .9686, .9608);
+    vec3 color2 = vec3(0., 0., 0.);
     float edge = img.r;
     vec2 grad_uv = uv;
     grad_uv -= .5;
@@ -551,9 +553,14 @@ export default function MetallicPaint({
       const imgRatio = imageData.width / imageData.height;
       glCtx.uniform1f(u.u_img_ratio, imgRatio);
 
-      const side = 512; // ⚡ lebih kecil dari 1000 → lebih ringan
-      canvasEl.width = side * devicePixelRatio;
-      canvasEl.height = side * devicePixelRatio;
+      // Logo ini dirender ~42px di layar. Kanvas 512 x devicePixelRatio
+      // berarti pada ponsel dpr 3 kita menjalankan fragment shader untuk
+      // 1536x1536 = 2,36 juta piksel setiap frame, selamanya, demi kotak 42px.
+      // 160 dengan dpr dibatasi 2 sudah jauh melebihi kebutuhan.
+      const side = 160;
+      const ratio = Math.min(devicePixelRatio, 2);
+      canvasEl.width = side * ratio;
+      canvasEl.height = side * ratio;
       glCtx.viewport(0, 0, canvasEl.height, canvasEl.height);
       glCtx.uniform1f(u.u_ratio, 1);
       glCtx.uniform1f(u.u_img_ratio, imgRatio);

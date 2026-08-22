@@ -318,7 +318,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           "relative group",
           isVertical
             ? "overflow-hidden h-full inline-block"
-            : "overflow-x-hidden",
+            : "overflow-x-clip",
           scaleOnHover && "py-[calc(var(--logoloop-logoHeight)*0.1)]",
           className
         ),
@@ -481,7 +481,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
                   className={cx(
                     "pointer-events-none absolute inset-x-0 top-0 z-10",
                     "h-[clamp(24px,8%,120px)]",
-                    "bg-[linear-gradient(to_bottom,var(--logoloop-fadeColor,#ffffff)_0%,transparent_100%)]"
+                    "bg-[linear-gradient(to_bottom,var(--logoloop-fadeColor,#faf7f5)_0%,transparent_100%)]"
                   )}
                 />
                 <div

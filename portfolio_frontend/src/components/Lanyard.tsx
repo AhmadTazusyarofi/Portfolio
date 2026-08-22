@@ -33,13 +33,34 @@ export default function Lanyard({
   fov = 20,
   transparent = true,
 }) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Physics rapier + render three berjalan lewat rAF terus-menerus, bahkan
+  // ketika section ini jauh di luar viewport. Di perangkat kelas menengah itu
+  // membuat scroll tersendat. frameloop="never" menghentikan keduanya sampai
+  // kanvas benar-benar terlihat.
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="lanyard-wrapper">
+    <div className="lanyard-wrapper" ref={wrapperRef}>
       <Canvas
         className="lanyard-canvas"
         style={{ width: "100%", height: "100%" }}
         camera={{ position, fov }}
         gl={{ alpha: transparent }}
+        dpr={[1, 1.5]}
+        frameloop={isVisible ? "always" : "never"}
         onCreated={({ gl }) =>
           gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
         }
