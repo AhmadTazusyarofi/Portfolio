@@ -38,13 +38,17 @@ const STROKE_PROPS = {
   trigger: "mount" as const,
   fillMode: "wipe" as const,
   fontWeight: 400,
-  letterSpacing: -4,
 };
 
-/* strokeWidth ada dalam satuan user SVG, jadi harus ikut skala fontSize.
-   Rasio 1.4/128 adalah proporsi asli dari contoh ReactBits. */
+/* strokeWidth dan letterSpacing sama-sama bersatuan user SVG, jadi keduanya
+   harus ikut skala fontSize. Rasio 1.4/128 dan -4/128 adalah proporsi asli
+   dari contoh ReactBits. Nilai tetap -4 pada teks kecil membuat hurufnya
+   saling tumpang tindih. */
 const strokeFor = (fontSize: number) =>
   Number(((1.4 / 128) * fontSize).toFixed(2));
+
+const trackingFor = (fontSize: number) =>
+  Number(((-4 / 128) * fontSize).toFixed(2));
 
 export default function Hero() {
   const isSmall = useIsSmallScreen();
@@ -69,12 +73,14 @@ export default function Hero() {
               text="HI"
               fontSize={72}
               strokeWidth={strokeFor(72)}
+              letterSpacing={trackingFor(72)}
             />
             <StrokeText
               {...STROKE_PROPS}
               text="THERE!"
               fontSize={72}
               strokeWidth={strokeFor(72)}
+              letterSpacing={trackingFor(72)}
             />
           </div>
         ) : (
@@ -83,6 +89,7 @@ export default function Hero() {
             text="HI THERE!"
             fontSize={220}
             strokeWidth={strokeFor(220)}
+            letterSpacing={trackingFor(220)}
           />
         )}
 
@@ -90,23 +97,20 @@ export default function Hero() {
           I&rsquo;m a web developer who loves building smooth, interactive, and
           visually clean interfaces for the web.
         </p>
-
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <a
-            href="#projects"
-            className="inline-flex items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-background transition-transform duration-200 hover:-translate-y-0.5"
-          >
-            View my work
-          </a>
-
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center rounded-full border border-secondary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-secondary transition-colors duration-200 hover:bg-secondary hover:text-background"
-          >
-            Contact me
-          </a>
-        </div>
       </motion.section>
+
+      {/* Sejajar dengan tombol ChatWidget yang fixed di bottom-6 right-6.
+          Dibuat absolute, bukan fixed, supaya ikut tergulir bersama hero
+          alih-alih menempel di layar sepanjang halaman. */}
+      <div className="pointer-events-none absolute bottom-6 left-6 w-[180px] sm:w-[260px] md:w-[300px]">
+        <StrokeText
+          {...STROKE_PROPS}
+          text="2026 - WEB DEVELOPER"
+          fontSize={40}
+          strokeWidth={strokeFor(40)}
+          letterSpacing={trackingFor(40)}
+        />
+      </div>
     </main>
   );
 }
