@@ -3,6 +3,7 @@ import Contact from "@/sections/Contact";
 import Footer from "@/sections/Footer";
 import Hero from "@/sections/Hero";
 import Projects from "@/sections/Projects";
+import Services from "@/sections/Services";
 import Statement from "@/sections/Statement";
 import ScrollVelocity from "@/components/ScrollVelocity";
 
@@ -15,7 +16,7 @@ export default function Home() {
 
       <div className="pointer-events-none relative border-y border-secondary py-4 text-secondary">
         <ScrollVelocity
-          texts={["Creative Developer - ", "Scroll Down - "]}
+          texts={["Creative Developer - ", "Creative Developer - "]}
           velocity={60}
           damping={60}
           stiffness={350}
@@ -24,6 +25,8 @@ export default function Home() {
       </div>
 
       <Statement />
+
+      <Services />
 
       <Projects />
 
