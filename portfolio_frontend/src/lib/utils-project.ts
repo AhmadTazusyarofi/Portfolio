@@ -29,6 +29,11 @@ import dashboardKMP from "../assets/project/dashboard-kmp.webp";
 import ecommerce from "../assets/project/e-commerce.webp";
 import marketplace from "../assets/project/marketplace.webp";
 import portalKoperasi from "../assets/project/portal-kmp.webp";
+import portalKmp1 from "../assets/project/portalKMP/Capture.png";
+import portalKmp2 from "../assets/project/portalKMP/Capture1.png";
+import portalKmp3 from "../assets/project/portalKMP/Capture2.png";
+import portalKmp4 from "../assets/project/portalKMP/Capture3.png";
+import portalKmp5 from "../assets/project/portalKMP/Capture4.png";
 import ruyukImg from "../assets/project/ruyuk.webp";
 import ruyuk1 from "../assets/project/RuyukOutdoor/Capture.png";
 import ruyuk2 from "../assets/project/RuyukOutdoor/Capture2.png";
@@ -134,6 +139,7 @@ export const PROJECTS: ProjectItem[] = [
     ],
     liveUrl: "https://kmp.roemahprogram.com/",
     codeUrl: "#",
+    gallery: [portalKmp1, portalKmp2, portalKmp3, portalKmp4, portalKmp5],
   },
   {
     id: "dashoard-KMP",
