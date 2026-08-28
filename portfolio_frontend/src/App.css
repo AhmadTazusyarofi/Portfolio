@@ -6,6 +6,19 @@
 html,
 body {
   overflow-x: clip;
+
+  /* Scrollbar disembunyikan, halamannya tetap bisa di-scroll. Dua properti
+     karena dukungannya terbagi: `scrollbar-width` untuk Firefox dan Chrome
+     121+, `-ms-overflow-style` untuk Edge lawas. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Jalur WebKit lama (Safari, Chrome di bawah 121) yang tidak mengenal
+   `scrollbar-width`. */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 * {
