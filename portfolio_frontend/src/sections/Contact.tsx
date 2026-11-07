@@ -110,7 +110,7 @@ export default function Contact() {
             </a>
 
             <a
-              href="/CV/CV ATS - AHMAD TAZUSYAROFI.pdf"
+              href="/CV/AHMAD TAZUSYAROFI.pdf"
               download="Ahmad-Tazusyarofi-CV.pdf"
               className="inline-flex items-center justify-center rounded-full border border-secondary px-5 py-3 text-sm font-semibold uppercase tracking-wide text-secondary transition-colors hover:bg-secondary hover:text-background"
             >
