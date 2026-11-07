@@ -56,7 +56,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="/CV/CV ATS - AHMAD TAZUSYAROFI.pdf"
+                href="/CV/AHMAD TAZUSYAROFI.pdf"
                 download="Ahmad-Tazusyarofi-CV.pdf"
                 className="inline-flex items-center gap-2 rounded-full border border-background/40 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-background transition-colors duration-200 hover:border-background hover:bg-background hover:text-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background"
               >
